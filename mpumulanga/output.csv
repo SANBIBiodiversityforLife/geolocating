@@ -1,0 +1,187 @@
+original_locality,original_qds,latitude,longitude,precision,precby,correctedaddress,gmapslink,farm
+Kruger National  Park,2431BA,-23.8214244,31.4456179,APPROXIMATE,johaadienr,"Kruger National Park, South Africa","http://www.google.co.za/maps/place/-23.8214244,31.4456179",Distance from original qds: 0.4800672429105824
+,2529DA,-29.817,30.637,APPROXIMATE,johaadienr,"Mpumalanga, South Africa","http://www.google.co.za/maps/place/-29.817,30.637",Distance from original qds: 5.087559139705405
+Bridge over Crocodile River; Malelane gate; Kruger NP,2531BC,0,0,0,johaadienr,0,,0
+"Kruger National Park, 8km SE of Gudzani Dam",2431BD,0,0,0,johaadienr,0,,0
+"Kruger National Park, Sweni Bird Hide",2431BD,0,0,0,johaadienr,0,,0
+"Kruger National Park, Nwanetsi Picnic Spot",2431BD,0,0,0,johaadienr,0,,0
+"Kruger National Park, Piet Grobler Dam",2431BA,-24.2305166,31.6333235,ROOFTOP,johaadienr,"Piet Grobler Dam, Kruger National Park, Kruger Park, South Africa","http://www.google.co.za/maps/place/-24.2305166,31.6333235",Distance from original qds: 0.673970740112514
+"Kruger National Park, Sabie River Low-water Bridge, Skukuza",2431DC,0,0,0,johaadienr,0,,0
+"Kruger National Park, Nsemani Dam",2431BC,-24.3917348,31.7172303,APPROXIMATE,johaadienr,"Nsemani Dam, Kruger National Park, Kruger Park, South Africa","http://www.google.co.za/maps/place/-24.3917348,31.7172303",Distance from original qds: 0.8172364754274797
+"Kruger National Park, Ngwenyeni Windmill",2431DA,0,0,0,johaadienr,0,,0
+"Kruger National Park, Lake Panic, Skukuza Staff Village",2431DC,0,0,0,johaadienr,0,,0
+"Kruger National Park, Skukuza Staff Village Tree House",2431DC,0,0,0,johaadienr,0,,0
+"Kruger National Park, Nwaswitshaka River, Skukuza Staff Village",2431DC,0,0,0,johaadienr,0,,0
+"Kruger National Park, Skukuza Bird Hide",2431DC,-24.9813664,31.5662252,ROOFTOP,johaadienr,"Lake Panic Bird Hide, Kruger National Park, Kruger Park, South Africa","http://www.google.co.za/maps/place/-24.9813664,31.5662252",Distance from original qds: 1.1330008773888922
+"Kruger National Park, Skukuza Low-Water Bridge",2431DC,0,0,0,johaadienr,0,,0
+"Sunset dam, Lower Sabie",2531BB,0,0,0,johaadienr,0,,0
+Sabie River at Lubyelubye stream entrance,2531BB,0,0,0,johaadienr,0,,0
+Sabie River low-water bridge,2431DC,0,0,0,johaadienr,0,,0
+"Silolweni Dam, Tchokwane",2431DD,0,0,0,johaadienr,0,,0
+Blydepoort Dam (Blyderivierpoort 595KT),2430DB,0,0,0,johaadienr,0,,0
+Malelane; KNP,2531AD,-25.483333,31.516667,APPROXIMATE,johaadienr,"Malelane, South Africa","http://www.google.co.za/maps/place/-25.483333,31.516667",Distance from original qds: 0.7074995249312893
+Malelane Bridge; KNP,2531BC,-25.2739702,31.5352404,GEOMETRIC_CENTER,johaadienr,"Kruger National Park, Malelane - Skukuza Road, Kruger Park, South Africa","http://www.google.co.za/maps/place/-25.2739702,31.5352404",Distance from original qds: 0.6012835905628888
+Skukuza Camp; KNP,2431DC,-24.9934347,31.5921942,GEOMETRIC_CENTER,johaadienr,"Kruger National Park, Skukuza Camp Road, Skukuza, 1350, South Africa","http://www.google.co.za/maps/place/-24.9934347,31.5921942",Distance from original qds: 1.156549382291018
+farm Sabie Bungalows 9/26; Hazyview district,2531AA,-25.08144,30.78993,FARMPRECISION,johaadienr,Sabie,"http://www.google.co.za/maps/place/-25.08144,30.78993",Farm matched is Sabie with 88+ accuracy
+Thlamphi Dam; Sabi Sabi; Sabi Sand Game Reserve,2431CD,0,0,0,johaadienr,0,,0
+"Kruger National Park, Orpen Dam",2431DD,-24.7923029,31.8998393,APPROXIMATE,johaadienr,"Orpen Dam, Kruger National Park, Kruger Park, South Africa","http://www.google.co.za/maps/place/-24.7923029,31.8998393",Distance from original qds: 1.1989389689108028
+"Kruger National Park, Nwamuriwa look-out rocks, Metsi-Metsi",2431DD,0,0,0,johaadienr,0,,0
+"Kruger National Park, N'watimuvu stream near Nwaswitsontso river",2431DD,0,0,0,johaadienr,0,,0
+"Kruger National Park, N'watimuvu stream, Metsi-Metsi trail",2431DD,0,0,0,johaadienr,0,,0
+"Kruger National Park, N'watimuvu stream",2431DD,0,0,0,johaadienr,0,,0
+"Kruger National Park, Ka Ngadjane Fountain near Metsi-Metsi windmill",2431DD,0,0,0,johaadienr,0,,0
+"Kruger National Park, Mananga Windmill, Satara",2431BD,0,0,0,johaadienr,0,,0
+"Kruger National Park, Shibotwane  Windmill, Satara",2431BD,0,0,0,johaadienr,0,,0
+"Kruger National Park, 24km E of Orpen Camp",2431BC,-26.25137,30.27349,FARMPRECISION,johaadienr,Iona,"http://www.google.co.za/maps/place/-26.25137,30.27349",Farm matched is Iona with 88+ accuracy
+"Kruger National Park, Rabelais Dam",2431AD,0,0,0,johaadienr,0,,0
+"Kruger National Park, Olifants River Highwater bridge, just S of Olifants Camp",2431BA,0,0,0,johaadienr,0,,0
+Komatie Poort,2531BD,-25.433333,31.95,APPROXIMATE,johaadienr,"Komatipoort, South Africa","http://www.google.co.za/maps/place/-25.433333,31.95",Distance from original qds: 1.0441635355101229
+"Mauchsberg, the staircase",2530BA,0,0,0,johaadienr,0,,0
+Mount Sheba,2430DC,-24.933333,30.716667,APPROXIMATE,johaadienr,"Mount Sheba, South Africa","http://www.google.co.za/maps/place/-24.933333,30.716667",Distance from original qds: 1.176742145832299
+Blyde River Canyon Nat Res,2430DB,-24.5919444,30.8091667,APPROXIMATE,johaadienr,"Blyde River Canyon, Motlatse Canyon Provincial Nature Reserve, South Africa","http://www.google.co.za/maps/place/-24.5919444,30.8091667",Distance from original qds: 1.0025711551207959
+Komatipoort,2531BD,-25.433333,31.95,APPROXIMATE,johaadienr,"Komatipoort, South Africa","http://www.google.co.za/maps/place/-25.433333,31.95",Distance from original qds: 1.0441635355101229
+"Farm Rietpoort, 83",2729BB,-26.977,29.08849,FARMPRECISION,johaadienr,Rietpoort,"http://www.google.co.za/maps/place/-26.977,29.08849",Farm matched is Rietpoort with 88+ accuracy
+"Farmsmalkloof, 122",2729BD,-27.29014,29.80109,FARMPRECISION,johaadienr,Smalkloof,"http://www.google.co.za/maps/place/-27.29014,29.80109",Farm matched is Smalkloof with 88+ accuracy
+"Farm Smalkloof, 122",2729BD,-27.29014,29.80109,FARMPRECISION,johaadienr,Smalkloof,"http://www.google.co.za/maps/place/-27.29014,29.80109",Farm matched is Smalkloof with 88+ accuracy
+"Farm Paardekop, 76",2729BA,-25.29084,31.03007,FARMPRECISION,johaadienr,Paardekop,"http://www.google.co.za/maps/place/-25.29084,31.03007",Farm matched is Paardekop with 88+ accuracy
+"Farm Welgedacht, 82",2729BB,-25.43224,30.27806,FARMPRECISION,johaadienr,Welgedacht,"http://www.google.co.za/maps/place/-25.43224,30.27806",Farm matched is Welgedacht with 88+ accuracy
+"Farm Diepspruit, 414",2629CD,-26.16023,29.27754,FARMPRECISION,johaadienr,Diepspruit,"http://www.google.co.za/maps/place/-26.16023,29.27754",Farm matched is Diepspruit with 88+ accuracy
+"Farm Leeuwkraal, 50",2629DC,-26.59263,28.772,FARMPRECISION,johaadienr,Leeuwkraal,"http://www.google.co.za/maps/place/-26.59263,28.772",Farm matched is Leeuwkraal with 88+ accuracy
+"Farm Roodekopjes, 67",2729BB,-27.06103,29.79953,FARMPRECISION,johaadienr,Roodekopjes,"http://www.google.co.za/maps/place/-27.06103,29.79953",Farm matched is Roodekopjes with 88+ accuracy
+Farm  Bergvleit,2729BB,-25.4008,31.03097,FARMPRECISION,johaadienr,Bergvlei,"http://www.google.co.za/maps/place/-25.4008,31.03097",Farm matched is Bergvlei with 88+ accuracy
+Komati River; Komatipoort,2531BD,-25.4701672,31.9492972,APPROXIMATE,johaadienr,"Komati River, Komatipoort, South Africa","http://www.google.co.za/maps/place/-25.4701672,31.9492972",Distance from original qds: 1.059349975165752
+Lake Panic near Skukuza; Kruger National Park,2431DC,-24.9811381,31.5711674,APPROXIMATE,johaadienr,"Lake Panic, Kruger National Park, Kruger Park, South Africa","http://www.google.co.za/maps/place/-24.9811381,31.5711674",Distance from original qds: 1.135281537810938
+Graskop 564; 4.1km NW of Graskop; Mpumalanga.,2430DD,-24.93386,30.81066,FARMPRECISION,johaadienr,Graskop                                                                                                                                               ,"http://www.google.co.za/maps/place/-24.93386,30.81066",Multiple farms found
+Lake Panic; Kruger National Park,2431DC,-24.9811381,31.5711674,APPROXIMATE,johaadienr,"Lake Panic, Kruger National Park, Kruger Park, South Africa","http://www.google.co.za/maps/place/-24.9811381,31.5711674",Distance from original qds: 1.135281537810938
+Komatispoort,2531BD,-25.433333,31.95,APPROXIMATE,johaadienr,"Komatipoort, South Africa","http://www.google.co.za/maps/place/-25.433333,31.95",Distance from original qds: 1.0441635355101229
+Farm Rhenosterpoort 402,2428CA,0,0,FARMPRECISION,johaadienr,Closest match Renosterkop with certainty of 72,,No farm found
+Lothair,2630AD,-26.383333,30.43333299999999,APPROXIMATE,johaadienr,"Lothair, South Africa","http://www.google.co.za/maps/place/-26.383333,30.43333299999999",Distance from original qds: 0.5785513614001716
+Delmas,2628BA,-26.15,28.68333299999999,APPROXIMATE,johaadienr,"Delmas, South Africa","http://www.google.co.za/maps/place/-26.15,28.68333299999999",Distance from original qds: 0.6996027364790581
+Middleburg,2529CD,-25.7770026,29.4701613,APPROXIMATE,johaadienr,"Middelburg, Middelburg - MP, South Africa","http://www.google.co.za/maps/place/-25.7770026,29.4701613",Distance from original qds: 0.9081765733735098
+Bethal,2629AD,-26.4578664,29.466654,APPROXIMATE,johaadienr,"Bethal, South Africa","http://www.google.co.za/maps/place/-26.4578664,29.466654",Distance from original qds: 0.6537641745805278
+Xstrata Mine Thorncliffe; Sekukhuneland,2430CC,0,0,0,johaadienr,0,,0
+Farm Schoonwater,2530CB,-25.76486,30.35525,FARMPRECISION,johaadienr,Schoonwater                                                                                                                                           ,"http://www.google.co.za/maps/place/-25.76486,30.35525",Multiple farms found
+Belfast,2530CA,-25.683333,30.016667,APPROXIMATE,johaadienr,"Belfast, South Africa","http://www.google.co.za/maps/place/-25.683333,30.016667",Distance from original qds: 0.6835362300405162
+Lydenburg,2530AB,-25.096,30.446,APPROXIMATE,johaadienr,"Lydenburg, South Africa","http://www.google.co.za/maps/place/-25.096,30.446",Distance from original qds: 0.45621486166060105
+"Farm Rietfontein, 255",2530BD,0,0,FARMPRECISION,johaadienr,,,"No farm found, no fuzzy matching as name is too common"
+Farm Hartebeesfontein 281,2427BC,0,0,FARMPRECISION,johaadienr,,,"No farm found, no fuzzy matching as name is too common"
+Farm Wonderboom,2429BC,-25.58177,29.3284,FARMPRECISION,johaadienr,Wonderboom                                                                                                                                            ,"http://www.google.co.za/maps/place/-25.58177,29.3284",Multiple farms found
+Farm Duurstede,2531CD,-25.86393,29.61198,FARMPRECISION,johaadienr,Ede,"http://www.google.co.za/maps/place/-25.86393,29.61198",Farm matched is Ede with 88+ accuracy
+Farm Lakenvallei,2530CA,-25.5869,30.10388,FARMPRECISION,johaadienr,Lakenvlei,"http://www.google.co.za/maps/place/-25.5869,30.10388",Farm matched is Lakenvlei with 88+ accuracy
+Sabie,2730BB,-25.097778,30.77916699999999,APPROXIMATE,johaadienr,"Sabie, South Africa","http://www.google.co.za/maps/place/-25.097778,30.77916699999999",Distance from original qds: 2.055614202902135
+Farm Masleroems Oude stad,2429DD,0,0,FARMPRECISION,johaadienr,Closest match Almero with certainty of 74,,No farm found
+"Farm Vergelegen, 819",2429DD,-25.51477,31.4748,FARMPRECISION,johaadienr,Vergelegen,"http://www.google.co.za/maps/place/-25.51477,31.4748",Farm matched is Vergelegen with 88+ accuracy
+Masleroems Oude Stad,2429DD,0,0,0,johaadienr,0,,0
+White River,2531AC,-25.316667,31.016667,APPROXIMATE,johaadienr,"White River, South Africa","http://www.google.co.za/maps/place/-25.316667,31.016667",Distance from original qds: 0.3171053102330508
+Nelspruit,2530DB,-25.4752984,30.9694163,APPROXIMATE,johaadienr,"Nelspruit, South Africa","http://www.google.co.za/maps/place/-25.4752984,30.9694163",Distance from original qds: 1.079665009041345
+"Lothair, Bloemkrantz Bazaar",2630AD,0,0,0,johaadienr,0,,0
+"Blydepoort Resort & Bourkes Luck, 2 km S of view point",2430DB,0,0,0,johaadienr,0,,0
+"Belfast, Doringkop (Doornkop)",2529DB,0,0,0,johaadienr,"Belfast, Belfast, UK",,0
+Hartbeesul Nat. Res,2530BA,0,0,0,johaadienr,0,,0
+Farm Dorstbult,2630AB,0,0,FARMPRECISION,johaadienr,Closest match Doornbult with certainty of 78,,No farm found
+Farm Mountain Trout,2630AB,0,0,FARMPRECISION,johaadienr,Closest match Mountain View with certainty of 72,,No farm found
+Pilgrim`s Rest 7 KM W of,2430DD,0,0,0,johaadienr,0,,0
+"Farm Paardeplaas, 12.1km East of Lydenburg, Long Tom Pass",2530BA,-25.75126,29.9897,FARMPRECISION,johaadienr,Paardeplaas,"http://www.google.co.za/maps/place/-25.75126,29.9897",Farm matched is Paardeplaas with 88+ accuracy
+"Barberton, (Born in  Captivity)",2531CC,0,0,0,johaadienr,0,,0
+"Barberton, (Mother)",2531CC,0,0,0,johaadienr,0,,0
+"Farm Dooroek, 157",2630BB,0,0,FARMPRECISION,johaadienr,Closest match Doornnek with certainty of 68,,No farm found
+Mac-Mac Pools,2430DD,-25.0141593,30.831188,APPROXIMATE,johaadienr,"Mac Mac Pools, Motlatse Canyon Provincial Nature Reserve, South Africa","http://www.google.co.za/maps/place/-25.0141593,30.831188",Distance from original qds: 1.3112561066094184
+"Kruger National Park, Metsi-Metsi trails camp",2431DD,0,0,0,johaadienr,0,,0
+"Metsi-metsi trail camp,",2431DD,0,0,0,johaadienr,0,,0
+FARM PEEBLES (31),2531AA,-25.19268,31.05757,FARMPRECISION,johaadienr,Peeble,"http://www.google.co.za/maps/place/-25.19268,31.05757",Farm matched is Peeble with 88+ accuracy
+Klaserie town area,2431CA,0,0,0,johaadienr,0,,0
+Barberton,2531CC,-25.786111,31.053056,APPROXIMATE,johaadienr,"Barberton, South Africa","http://www.google.co.za/maps/place/-25.786111,31.053056",Distance from original qds: 0.7878993866332156
+"Farm Renosterkop, 195",2531CA,-25.52731,31.01701,FARMPRECISION,johaadienr,Renosterkop,"http://www.google.co.za/maps/place/-25.52731,31.01701",Farm matched is Renosterkop with 88+ accuracy
+Near Karino,2531AC,-25.47194,31.10083,APPROXIMATE,johaadienr,"Karino, N4 National, South Africa","http://www.google.co.za/maps/place/-25.47194,31.10083",Distance from original qds: 0.4825909784693449
+"Kruger National Park, Kingfisherspruit Ranger Station",2431AD,0,0,0,johaadienr,0,,0
+"Kruger National Park, Riverview (17km E of Orpen Restcamp)",2431BC,0,0,0,johaadienr,0,,0
+Near Malelane,2531AD,-25.483333,31.516667,APPROXIMATE,johaadienr,"Malelane, South Africa","http://www.google.co.za/maps/place/-25.483333,31.516667",Distance from original qds: 0.7074995249312893
+Thumbela Shaws break; Sabi Sabi; Sabi Sand GR,2431CD,0,0,0,johaadienr,0,,0
+Open Area Tingala; Sabi Sabi GR,2431DC,0,0,0,johaadienr,0,,0
+Near Earth Lodge; Sabi Sabi GR; Sabi Sand GR,2431CD,0,0,0,johaadienr,0,,0
+6 km W of Komatipoort,2531BD,0,0,0,johaadienr,0,,0
+Mluwati Concession; Orpen District; KNP,2431DA,0,0,0,johaadienr,0,,0
+Curlews road; White River,2531AC,-25.3891203,31.0049331,GEOMETRIC_CENTER,johaadienr,"Curlews Road, South Africa","http://www.google.co.za/maps/place/-25.3891203,31.0049331",Distance from original qds: 0.38915156860495714
+White Dam; Nottens; Sabi Sand Game Reserve,2431DC,0,0,0,johaadienr,0,,0
+Whiskey spruit,2530BA,0,0,0,johaadienr,0,,0
+"Kruger National Park, 1.2km N of Metsi-metsi windmill",2431DD,0,0,0,johaadienr,0,,0
+"Kruger National Park, 5.3km N of Metsi-metsi windmill on metsi-metsi stream",2431DB,0,0,0,johaadienr,0,,0
+"Kruger National Park, Napi Trails Camp",2531AB,-25.1638025,31.4377574,GEOMETRIC_CENTER,johaadienr,"Kruger National Park, Napi Trails Camp Road, Kruger Park, South Africa","http://www.google.co.za/maps/place/-25.1638025,31.4377574",Distance from original qds: 0.46740004306911304
+"Kruger National Park, Nwatinhlaru windmill",2431AD,0,0,0,johaadienr,0,,0
+"Kruger National Park, KaMhangadyana",2431AD,0,0,0,johaadienr,0,,0
+"Kruger National Park, KaMhangadyane Koppie",2431AD,0,0,0,johaadienr,0,,0
+"Kruger National Park, Monzwene Windmill",2431DA,0,0,0,johaadienr,0,,0
+"Kruger National Park, Milaleni Windmill, Satara",2431BD,0,0,0,johaadienr,0,,0
+"Kruger National Park, 8km N of Satara Restcamp",2431BD,0,0,0,johaadienr,0,,0
+"Kruger National Park, Nwatingala",2431BC,0,0,0,johaadienr,0,,0
+"Kruger National Park, Ngwamutsatsa Windmill",2431AD,0,0,0,johaadienr,0,,0
+Farm Pullen,2531CA,-26.02493,29.65113,FARMPRECISION,johaadienr,Pullens Hope                                                                                                                                          ,"http://www.google.co.za/maps/place/-26.02493,29.65113",Farm matched exactly
+Kastrol,2730AA,0,0,0,johaadienr,0,,0
+Kastrol Nek,2730AD,0,0,0,johaadienr,0,,0
+Graskop,2430DD,-24.931667,30.841667,APPROXIMATE,johaadienr,"Graskop, South Africa","http://www.google.co.za/maps/place/-24.931667,30.841667",Distance from original qds: 1.2555503724574348
+Ohrigstad Dam Nat Res,2430DC,-24.9544385,30.6314948,APPROXIMATE,johaadienr,"Ohrigstad Dam Nature Reserve, South Africa","http://www.google.co.za/maps/place/-24.9544385,30.6314948",Distance from original qds: 1.1444380860095862
+Nelshoogte,2530DD,-25.799263,29.45897,GEOMETRIC_CENTER,johaadienr,"Nelshoogte Street, Middelburg - MP, 1055, South Africa","http://www.google.co.za/maps/place/-25.799263,29.45897",Distance from original qds: 0.9651605068945781
+Farm Lisabon,2530BC,-24.98397,31.46332,FARMPRECISION,johaadienr,Lisbon,"http://www.google.co.za/maps/place/-24.98397,31.46332",Farm matched is Lisbon with 88+ accuracy
+Sheba Mountain 2 KM N,2430DD,0,0,0,johaadienr,0,,0
+Farm Rietfonetin,2530BD,-25.55788,28.98861,FARMPRECISION,johaadienr,Rietfontein,"http://www.google.co.za/maps/place/-25.55788,28.98861",Farm matched is Rietfontein with 88+ accuracy
+Farm Paardeplaats,2530BA,-25.39822,30.03808,FARMPRECISION,johaadienr,Paardeplaats                                                                                                                                          ,"http://www.google.co.za/maps/place/-25.39822,30.03808",Multiple farms found
+"Farm Doornhoek, 545",2430DC,-25.63739,30.31899,FARMPRECISION,johaadienr,Doornhoek,"http://www.google.co.za/maps/place/-25.63739,30.31899",Farm matched is Doornhoek with 88+ accuracy
+Long Tom Pass Staircase,2530BA,0,0,0,johaadienr,0,,0
+Skukuza Airstrip,2431DC,-24.9631136,31.5899073,APPROXIMATE,johaadienr,"Skukuza Aerodrome (SZK), Kruger Park, South Africa","http://www.google.co.za/maps/place/-24.9631136,31.5899073",Distance from original qds: 1.1294150827301048
+"Krokodile Bridge Gate, Kruger Nat Park",2531BD,-25.156796,31.9338158,GEOMETRIC_CENTER,johaadienr,"Kruger National Park, Lower Sabie - Crocodile Bridge Road, Kruger Park, South Africa","http://www.google.co.za/maps/place/-25.156796,31.9338158",Distance from original qds: 0.9468880260863175
+Farm Doornhoek,2430DA,-24.9575,30.50873,FARMPRECISION,johaadienr,Doornhoek                                                                                                                                             ,"http://www.google.co.za/maps/place/-24.9575,30.50873",Multiple farms found
+Nelspruit S 25 29 54.1 E 31 00 23.4 855 m.a.s.l.,2531AC,-25.54785,30.94371,FARMPRECISION,johaadienr,Nelspruit,"http://www.google.co.za/maps/place/-25.54785,30.94371",Farm matched is Nelspruit with 88+ accuracy
+Leeuwfontein Collaborative Nature Reserve (Leeuwfontein 212 JR),2528BC,0,0,0,johaadienr,0,,0
+Farm  Goedemoed,2630CC,-26.08697,29.93404,FARMPRECISION,johaadienr,Goedemoed                                                                                                                                             ,"http://www.google.co.za/maps/place/-26.08697,29.93404",Multiple farms found
+Stanley Bush kop,2430DD,0,0,0,johaadienr,0,,0
+"Farm Buitenzong, (114)",2730AC,-27.29635,30.10984,FARMPRECISION,johaadienr,Buitenzorg,"http://www.google.co.za/maps/place/-27.29635,30.10984",Farm matched is Buitenzorg with 50+ accuracy and same QDS
+Farm Kleinfontein,2730AA,-27.03702,30.07643,FARMPRECISION,johaadienr,Kleinfontein                                                                                                                                          ,"http://www.google.co.za/maps/place/-27.03702,30.07643",Multiple farms found
+Farm Geelhoutboom,2630CD,-26.90375,30.2823,FARMPRECISION,johaadienr,Geelhoutboom                                                                                                                                          ,"http://www.google.co.za/maps/place/-26.90375,30.2823",Multiple farms found
+Farm Roodewal,2729BA,-26.56438,30.20668,FARMPRECISION,johaadienr,Roodewal                                                                                                                                              ,"http://www.google.co.za/maps/place/-26.56438,30.20668",Multiple farms found
+Farm Mooimeisiefontein,2729BA,0,0,FARMPRECISION,johaadienr,,,"No farm found, no fuzzy matching as name is too common"
+"Farm Tafelkop, 126",2730AD,-26.46756,29.76257,FARMPRECISION,johaadienr,Tafelkop,"http://www.google.co.za/maps/place/-26.46756,29.76257",Farm matched is Tafelkop with 88+ accuracy
+Farm Roodekopjes,2729BA,-27.06103,29.79953,FARMPRECISION,johaadienr,Roodekopjes                                                                                                                                           ,"http://www.google.co.za/maps/place/-27.06103,29.79953",Farm matched exactly
+Grootvlei Mine,2628AB,-26.2407541,28.4805569,APPROXIMATE,johaadienr,"Grootvlei Proprietary Mines, Springs, South Africa","http://www.google.co.za/maps/place/-26.2407541,28.4805569",Distance from original qds: 0.5374918332443945
+Farm Josefsdal,2531CC,-25.96209,31.07887,FARMPRECISION,johaadienr,Josefsdal                                                                                                                                             ,"http://www.google.co.za/maps/place/-25.96209,31.07887",Farm matched exactly
+"Frischgewaagd (Bobididi) Resettllement (about 20 km S of Steelpoort), at trap 12-3",2430CC,0,0,0,johaadienr,0,,0
+KALKFONTEIN (12-1 & 2),2430CC,0,0,FARMPRECISION,johaadienr,,,"No farm found, no fuzzy matching as name is too common"
+Graskop; boundary of Blue Swallow Conservation area and town; Mpumalanga.,2430DD,-24.931667,30.841667,APPROXIMATE,johaadienr,"Graskop, South Africa","http://www.google.co.za/maps/place/-24.931667,30.841667",Distance from original qds: 1.2555503724574348
+farm Batavia 151 IT; Lekkerspruit riv.; Badplaas,2630BA,0,0,FARMPRECISION,johaadienr,Closest match Alva with certainty of 67,,No farm found
+Selati,2430BA,-26.5262539,29.199427,GEOMETRIC_CENTER,johaadienr,"Selati Street, Secunda, 2302, South Africa","http://www.google.co.za/maps/place/-26.5262539,29.199427",Distance from original qds: 2.6500709227479575
+Mbandywe Dam,2431BA,0,0,0,johaadienr,0,,0
+Farm Redcliff,2630DA,-26.74274,30.7293,FARMPRECISION,johaadienr,Redcliffs                                                                                                                                             ,"http://www.google.co.za/maps/place/-26.74274,30.7293",Farm matched exactly
+Farm Elandsfontein,2730AB,-27.20469,29.99073,FARMPRECISION,johaadienr,Elandsfontein                                                                                                                                         ,"http://www.google.co.za/maps/place/-27.20469,29.99073",Multiple farms found
+Farm Kranskloof,2430DC,-24.89024,30.60075,FARMPRECISION,johaadienr,Kranskloof                                                                                                                                            ,"http://www.google.co.za/maps/place/-24.89024,30.60075",Multiple farms found
+Mala Mala,2431DC,-24.8003764,31.5408156,APPROXIMATE,johaadienr,"Mala Mala Game Reserve, 1260, South Africa","http://www.google.co.za/maps/place/-24.8003764,31.5408156",Distance from original qds: 0.9659626777884951
+Bourke`s  Luck  Potholes,2430DB,-24.5833333,30.8166667,APPROXIMATE,johaadienr,"Motlatse Canyon Provincial Nature Reserve, South Africa","http://www.google.co.za/maps/place/-24.5833333,30.8166667",Distance from original qds: 1.0036046222381492
+"Farm Naudes Rust, 272",2531CB,-25.64658,31.26567,FARMPRECISION,johaadienr,Naudes Rust,"http://www.google.co.za/maps/place/-25.64658,31.26567",Farm matched is Naudes Rust with 88+ accuracy
+"Farm Exelsior, (127)",2531CB,-25.54196,31.29273,FARMPRECISION,johaadienr,Excelsior,"http://www.google.co.za/maps/place/-25.54196,31.29273",Farm matched is Excelsior with 50+ accuracy and same QDS
+"Farm Excelsior,211",2531CB,-25.54196,31.29273,FARMPRECISION,johaadienr,Excelsior,"http://www.google.co.za/maps/place/-25.54196,31.29273",Farm matched is Excelsior with 88+ accuracy
+Farm Dycedale,2531CC,0,0,FARMPRECISION,johaadienr,Closest match Clendale with certainty of 75,,No farm found
+"Farm Broedershoek, 129",2531AC,-25.46186,31.11372,FARMPRECISION,johaadienr,Broedershoek,"http://www.google.co.za/maps/place/-25.46186,31.11372",Farm matched is Broedershoek with 88+ accuracy
+Farm  Kranskloof,2430DC,-24.89024,30.60075,FARMPRECISION,johaadienr,Kranskloof                                                                                                                                            ,"http://www.google.co.za/maps/place/-24.89024,30.60075",Multiple farms found
+Eureka City,2531CA,0,0,0,johaadienr,0,,0
+"Farm de Hoop, (203)",2531CA,-25.51414,31.15623,FARMPRECISION,johaadienr,De Hoop,"http://www.google.co.za/maps/place/-25.51414,31.15623",Farm matched is De Hoop with 88+ accuracy
+Farm Loopfontein,2530DA,0,0,FARMPRECISION,johaadienr,,,"No farm found, no fuzzy matching as name is too common"
+Farm Bakenkop,2730BB,-27.12829,30.91178,FARMPRECISION,johaadienr,Bakenkop                                                                                                                                              ,"http://www.google.co.za/maps/place/-27.12829,30.91178",Multiple farms found
+Luphisi,2531AD,-25.4111647,31.2712203,APPROXIMATE,johaadienr,"Luphisi, Luphisi, South Africa","http://www.google.co.za/maps/place/-25.4111647,31.2712203",Distance from original qds: 0.49256153083465637
+Farm de Kuilen,2530BA,-25.1421,30.61633,FARMPRECISION,johaadienr,De Kuilen                                                                                                                                             ,"http://www.google.co.za/maps/place/-25.1421,30.61633",Farm matched exactly
+"Farm Groothoek ,171",2730BA,0,0,FARMPRECISION,johaadienr,Closest match Oshoek with certainty of 74,,No farm found
+Paradise Camp,2430DD,0,0,0,johaadienr,0,,0
+Outskirts of Komatipoort,2531BD,0,0,0,johaadienr,0,,0
+Brondal,2530BC,-25.345831,30.825812,APPROXIMATE,johaadienr,"Brondal, South Africa","http://www.google.co.za/maps/place/-25.345831,30.825812",Distance from original qds: 0.8953013682023494
+14km FROM BLYDE TURN OFF,2430DD,0,0,0,johaadienr,0,,0
+Ohrigstad,2430DA,-24.6865139,30.2512728,APPROXIMATE,johaadienr,"Burgersfort, South Africa","http://www.google.co.za/maps/place/-24.6865139,30.2512728",Distance from original qds: 0.7310535923672431
+Sabie 26 KM - Lydenburg,2530BB,-25.14073,30.67895,FARMPRECISION,johaadienr,Sabieshoek                                                                                                                                            ,"http://www.google.co.za/maps/place/-25.14073,30.67895",Multiple farms found
+Blyde River Canyon NR; Graskop district,2430DB,0,0,0,johaadienr,0,,0
+Graskop 564; 4.2km W of Graskop; Mpumalanga.,2430DD,-24.93386,30.81066,FARMPRECISION,johaadienr,Graskop                                                                                                                                               ,"http://www.google.co.za/maps/place/-24.93386,30.81066",Multiple farms found
+farm London 496 KT; Graskop district,2430DD,0,0,FARMPRECISION,johaadienr,Closest match lona with certainty of 67,,No farm found
+farm Vertroostings 218; Sabie district,2530BB,0,0,FARMPRECISION,johaadienr,Closest match Evert with certainty of 72,,No farm found
+Wakkerstroom,2730AC,-27.35,30.133333,APPROXIMATE,johaadienr,"Wakkerstroom, South Africa","http://www.google.co.za/maps/place/-27.35,30.133333",Distance from original qds: 0.37453663223909234
+Pilgrims Rest,2430DD,-24.9005576,30.7522265,APPROXIMATE,johaadienr,"Pilgrim's Rest, Pilgrimsrest, 1290, South Africa","http://www.google.co.za/maps/place/-24.9005576,30.7522265",Distance from original qds: 1.1733919627387972
+Farm Merriekloof,2630DB,0,0,FARMPRECISION,johaadienr,Closest match Emrie with certainty of 72,,No farm found
+Farm Silvermist,2430DC,-25.35198,31.02331,FARMPRECISION,johaadienr,Silvermist                                                                                                                                            ,"http://www.google.co.za/maps/place/-25.35198,31.02331",Farm matched exactly
+Pilgrim's Rest,2430DD,-24.9005576,30.7522265,APPROXIMATE,johaadienr,"Pilgrim's Rest, Pilgrimsrest, 1290, South Africa","http://www.google.co.za/maps/place/-24.9005576,30.7522265",Distance from original qds: 1.1733919627387972
+Farm Diepkloof,2529BA,-25.51466,28.72632,FARMPRECISION,johaadienr,Diepkloof                                                                                                                                             ,"http://www.google.co.za/maps/place/-25.51466,28.72632",Multiple farms found
+Ohrigstad 5 km N of,2430DA,0,0,0,johaadienr,0,,0
+Farm Driekop,2430DD,-25.76992,30.16938,FARMPRECISION,johaadienr,Driekop                                                                                                                                               ,"http://www.google.co.za/maps/place/-25.76992,30.16938",Multiple farms found
