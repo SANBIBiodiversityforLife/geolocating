@@ -25,6 +25,7 @@ outputcsv = province_f + "/output.csv"
 fieldnames = ['original_locality', 'original_qds', 'latitude', 'longitude', 'precision', 'precby', 'correctedaddress', 'gmapslink', 'farm']
 gmapsprefix = 'http://www.google.co.za/maps/place/'
 farms = list(csv.reader(open(province_f + '/farms.csv')))
+gaz = list(csv.reader(open('GazetteerForSANBI.csv')))
 
 # Write the headers for the new file first
 with open(outputcsv, 'w', newline='') as newFile:
@@ -39,8 +40,26 @@ with open(inputcsv, newline='') as csvFile:
     for line in lineReader:
         farm, lat, lng, precision = [0] * 4
         loc = myfs.cleanedloc(line["Locality"])
-        print(loc)
         qds = line["Locus"].strip()
+
+
+        if strip(loc) is '':
+            # TODO if loc is blank then it needs to get the center from Fhatani's script (input qds) which he still has to write
+            # Write out the CSV
+            # writeoutput(writer, )
+            pass # one day this must be continue
+
+        # If the loc is x km from something etc then try and get the location with any of the below formulas, and at the end
+        # it needs to add/subtract from the lat and long
+        loc = myfs.getdirections(loc)
+        directions = loc["directions"]
+        loc = loc["locality"]
+
+        # We work out whether it is a park from the cleanedloc function
+        ispark = loc["ispark"]
+        loc = loc["locality"]
+
+        # What is Rukaya doing here?
         try:
             origLat = -1 * float(qds[0] + qds[1])
             origLng = float(qds[2] + qds[3])
@@ -101,6 +120,9 @@ with open(inputcsv, newline='') as csvFile:
                 else:
                     farm = "No farm found, no fuzzy matching as name is too common"
                     results = ""
+        elif ispark:
+            # TODO Fhatani will add a list of all parks and iterate over them
+            pass
         else:
             try:
                 if qds:
@@ -133,13 +155,18 @@ with open(inputcsv, newline='') as csvFile:
                 print("ANOTHER ERROR occurred when looking up in google " + str(sys.exc_info()))
                 # At this stage perhaps we should run it through bing or another map.
 
+        # If this locality has directions then try and calculate a new lat long based on the directions
+        # TODO Rukaya or Fhatani
+
         with open(outputcsv, 'a', newline='') as newFile:
             writer = csv.writer(newFile, skipinitialspace=True)
             if lat != 0:
                 googleMapsLink = gmapsprefix + str(lat) + ',' + str(lng)
             else:
                 googleMapsLink = ''
-            writer.writerow([line["Locality"],
+
+            # Write out the CSV
+            myfs.writeoutput(writer, [line["Locality"],
                              qds,
                              str(lat),
                              str(lng),

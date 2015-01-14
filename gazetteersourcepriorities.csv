@@ -1,0 +1,35 @@
+Source_,ConfLvl,Description,Trustworthiness
+SG Gaz,12,Gazetteer from CDSM - names on maps,1
+SG Gaz 2011,12,Gazetteer from NGI - names on 1:50 000 maps,1
+Acocks field notes/maps,12,Acocks field notes/maps,2
+Digitised off topographical maps,12,Digitised off topographical maps,1
+SG Railway points,12,SG Railway points from 1:500 000 data,2
+Digitised off 50k topographical maps,12,Digitised off 50k topographical maps,2
+Digitised off 250k topographical maps,12,Digitised off 250k topographical maps,1
+Digitised off 500k topographical maps,12,Digitised off 500k topographical maps,1
+Digitised off 500k 1900-1919 topographical map,12,Digitised off 500k 1900-1919 topographical map,3
+Digitised off other map source,12,Digitised of other map source,5
+Dmct Brd Plc_Name.dbf,12,Demarcation Board Plc_Name.dbf,1
+Dmct Brd PlName.dbf,12,Demarcation Board PlName.dbf,1
+SG Built_pts.shp,12,Built_pts.shp from 1:500 000 map data,3
+LesothoVillagesGoogleEarth,12,Village names from Google Earth,1
+Mozambique data,12,Data from delegate to TREES-3 workshop,1
+Jack Skead Gazetteer edited by LWP,12,Point from Zoo-historical Gazetteer for sn Af,2
+Jack Skead synonyms edited by LWP,12,Point from Zoo-historical Gazetteer for sn Af,2
+SAGNS Official Database,12,SAGNS Official Database - downloaded 15 Sep 2006,3
+Magisterial districts,14,Magisterial districts from 1:500 000 map data,1
+PRECIS Gaz,17,Names captured from various scale maps - centroid of ¼º grid,4
+Cadast ENPAT2001,20,Combined cadastral shapefiles from ENPAT2001,1
+Dmct Brd sa_parent_clk.dbf,20,Demarcation Board parent farm names (sa_parent_clk.dbf),1
+VEGM20xx protected areas,21,VEGM2006 protected areas,0
+SG Built_up.shp,22,Built_up.shp from 1:500 000 map data,3
+HSRC list from SAGNS website,0,HSRC list from SAGNS website,3
+Alastair Potts,30,"Various place names from UCT georeferencing section, source unknown.",4
+DIVA-GIS ZAF_gaz.zip,10,Gazetteer for South Africa downloaded from DIVA-GIS website April 2012,2
+ENPAT2001,12,Place names other than cadasters from ENPAT,1
+Other,12,Other source not mentioned above,5
+Forestry Herbarium notes,24,Tapson & Poynton Management aid from Forestry Herbarium,3
+Pers. Comm.,12,Point from personal communication of someone with personal knowledge,3
+Personal GPS data,1,GPS locations added by user,1
+AFRICAN PLACENAMES MapStudios,0,no coordinates - AFRICAN PLACENAMES from via MapStudiosWebsite.xls,0
+To delete,0,,

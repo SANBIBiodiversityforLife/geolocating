@@ -1,5 +1,8 @@
 import re
 
+def writeoutput(writer, locality='', qds='', lat='', lng='', precision='', precisionBy='', results='', googleMapsLink='', notes=''):
+    writer.writerow(locality, qds, lat, lng, precision, precisionBy, results, googleMapsLink, notes)
+
 def getfarmname(farmname):
     '''
     Checks to see whether a string is a farm name or not
@@ -37,13 +40,22 @@ def cleanedloc(loc):
     Removes superfluous strings which just confuse stuff
 
     :param loc: a location string
-    :return: loc
+    :return: loc (cleaned string), return true/false for a reserve
     '''
+    park = False
+
+    temp = loc
     loc = re.sub(r'Nat\.?\s+[pP]ark\.?', 'National Park', loc)
     loc = re.sub(r'Nat\.?\s+[rR]es\.?', 'Nature Reserve', loc)
     loc = re.sub(r'\s+N\.?\s?R\.?\s+', 'Nature Reserve', loc)
     loc = re.sub(r'\s+N(at)?\.?\s?P(ark)?\.?\s+', 'National Park', loc)
+    if temp != loc:
+        park = True
+
+    # A lot of them have the string "snake collected from x", remove that
     loc = re.sub(r'^\s*[cC]ollected\s+[fF]rom\s*', '', loc)
+
+    # Some of them have farm numbers or something?
     # loc = re.sub(r'\(\d+\)', '', loc) - removing this cus I'm doing something in the farmclean instead
 
     # I am not sure what this means but often things have K[letter]\d\d+ and that messes stuff up
@@ -56,7 +68,7 @@ def cleanedloc(loc):
 
     # A lot of things have been put in the proper address then a semi colon and random comments, so get rid of these
     loc = re.sub(r';.+$', '', loc)
-    return loc.strip()
+    return {"locality": loc.strip(), "ispark": park}
 
 
 def getdirections(loc):
