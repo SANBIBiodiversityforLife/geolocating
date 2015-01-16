@@ -1,67 +1,101 @@
 import re
 from fuzzywuzzy import process
-from math import pow, sqrt
-import sys
+from math import pow, sqrt, cos
+import sysLocation
+from enum import Enum
+
+
+class Provinces(Enum):
+    northern_cape = 'Northern Cape'
+    free_state = 'Free State'
+    gauteng = 'Gauteng'
+    kwazulu_natal = 'Kwazulu-Natal'
+    limpopo = 'Limpopo'
+    mpumalanga = 'Mpumalanga'
+    north_west = 'North West'
+    western_cape = 'Western Cape'
+    eastern_cape = 'Eastern Cape'
+
 
 class Location:
     '''
-    A geolocated Location
+    A location string with its latitude and longitude
     '''
-    new_lat = 0
-    new_long = 0
-    location = ''
-    original_qds = ''
-    original_lat = 0
-    original_long = 0
-    province = ''
-    directions = {'direction': '', 'distance': '', 'measurement': ''}
-    farm_number = 0
-    notes = ''
-    farms = []
-    gazetteer = []
-    google_geolocator = None
 
-    def __init__(self, province='', qds='', lat='', long='', location='', farms=[], gazetteer=[], google_geolocator=None):
+    def __init__(self, province='', qds='', lat='', long='', location='', farms=[], farm_names=[], gazetteer=[], google_geolocator=None):
+        '''
+        Set up the variables used in this object
+        '''
+        # Some info about the item we want to geolocate
         self.province = province
         self.original_qds = qds
         self.original_lat = float(lat)
         self.original_long = float(long)
         self.location = location
+
+        # These are databases/api tools to help us geolocate stuff
         self.farms = farms
+        self.farm_names = farm_names
         self.gazetteer = gazetteer
         self.google_geolocator = google_geolocator
 
-        print(location)
+        # Our geolocate info in some variables
+        self.directions = {'direction': '', 'distance': '', 'measurement': ''}
+        self.new_lat = 0
+        self.new_long = 0
+        self.farm_number = 0
+        self.notes = ''
+        self.gazetteer_lat = 0
+        self.gazetteer_long = 0
+        self.geolocation_source = None
 
+        # Run the main string of logic to geolocate this baby!
+        self._geolocate()
+
+    def _geolocate(self):
+        '''
+        The set of steps we run through to try and geolocate a string
+        '''
         # Clean the location string
         self._clean_location()
 
         # If the loc is x km from something etc then try and get the location and clean the location string further
         self._get_directions()
 
-        print(location)
-
-        # Does this location string contain something?
+        # Does this cleaned location string contain something?
         if self.location.strip() is '':
             # TODO if loc is blank then it needs to get the center from Fhatani's script (input qds) which he still has to write
+            # But wait, can't we just use the original lat/long?
             return
 
-        # Is this location a park?
-        if self._is_park():
-            # TODO Fhatani will add a list of all parks and iterate over them
-            pass
+        # Try and see if we can find this location in a list of the parks
+        if self._geolocate_park():
+            self.geolocation_source = "National parks list"
+            return
 
-        # Otherwise, is this location a farm?
+        # Otherwise, is this location a farm? This isn't a foolproof method, so we need to run it again if we can't
+        # find anything in the gazetteer or using google's api
         if self._is_farm():
-            self._surveyor_general_farm_processing()
-            # TODO add les' database farm processing
+            if self._geolocate_surveyor_general_farms():
+                self.geolocation_source = "Surveyor general farms"
+            else:
+                # TODO add les' database farm processing
+                self.notes = "This is a farm but it could not be found in the gazetteer"
+                self.geolocation_source = "Gazetteer - "
+            return
 
-        # Otherwise geolocate using google maps and les's database
-        self._geolocate_google()
+        # Ok it's not a special thing like a park or a farm, so let's try the gazetteer and google
         self._geolocate_gazetteer()
+        self._geolocate_google()
 
     def _geolocate_gazetteer(self):
+        # We have to run through all of the most trusted sources and then fallback to the least trusted
+        matched = list(filter(lambda x: re.search(self.location, x[1].strip()), self.farms))
         pass
+
+    def _geolocate_park(self):
+        # TODO Fhatani will add a list of all parks and iterate over them
+        return False
 
     def _geolocate_google(self):
         try:
@@ -87,6 +121,81 @@ class Location:
         except:
             print("ANOTHER ERROR occurred when looking up in google " + str(sys.exc_info()))
             # At this stage perhaps we should run it through bing or another map.
+
+    def _geolocate_surveyor_general_farms(self):
+        # Search through all the farms in the Surveyor General list without fuzzy matching
+        found_farms = list(filter(lambda x: re.search(self.location, x[1].strip()), self.farms))
+        if found_farms:
+            if len(found_farms) == 1:
+                self.notes = "Farm matched exactly in Surveyor General list. Matched farm = " + found_farms[0][1]
+                self.lat = found_farms[0][4]
+                self.long = found_farms[0][5]
+            else:
+                found_farms = min(found_farms, key=lambda x: sqrt((pow(float(x[4]) - self.original_lat, 2) + pow(float(x[5]) - self.original_long, 2))))
+                self.notes = "Multiple farms matched in Surveyor General list. Closest farm = " + found_farms[1]
+                self.lat = found_farms[4]
+                self.long = found_farms[5]
+            return True
+
+        # Fuzzy match through all the farms in the Surveyor General list
+        # Some farm names are too common to do fuzzy matching, basically anything with 'fontein'/'fountain'
+        if re.search(r'fou?nt[ae]in', self.location, re.IGNORECASE) is None:
+            # Get the top 5 fuzzy matched farms
+            results = process.extractBests(self.location, self.farm_names, limit=5, score_cutoff=70)
+            if results:
+                matched_farms = self.farms[self.farm_names.index(results[0])]
+                self.lat = matched_farms[0][4]
+                self.long = matched_farms[0][5]
+
+                # Which of those is the closest to the original lat long?
+                closest_matched_farm = min(matched_farms, key=lambda x: self._get_km_distance_from_original_location(x[4], x[5]))
+                if matched_farms[0] is not closest_matched_farm:
+                    self.notes = "Farm fuzzy matched (" + results[1] + "% + " + matched_farms[0][0] + \
+                                 ") through SG, best match different to closest farm to original lat long, which is = " + closest_matched_farm
+                else:
+                    self.notes = "Farm fuzzy matched (" + results[1] + "% + " + matched_farms[0][0] + ") though SG"
+
+                return True
+
+        # Can't find a farm!
+        self.notes = "No farm found using Surveyor General list."
+        return False
+
+    def _is_park(self):
+        '''
+        Works out whether this location is in a park or nature reserve
+        '''
+        return re.match('(National\s+Park|Nature\s+Reserve)', self.location, re.IGNORECASE)
+
+    def _get_directions(self):
+        main_regex = '\s*(\d\d*[,\.]?\d*)\s*(k?m|miles)\s+(([swne]{1,3})|south|no?rth|east|west)\s*(of|fro?m)?\s*'
+
+        # If there's something in front of it and something behind it, i.e., ^muizenberg, 20 km s of tokai$
+        # we really don't want to use the directions then, rather use the main thing and strip out the rest
+        m = re.search(r'^(.+?)' + re.escape(main_regex) + '(.+)$', self.location, re.IGNORECASE)
+        if m:
+            self.location = m.group(1)
+            return
+
+        # There's something behind it, i.e., ^40 km w from muizenberg
+        m = re.search(r'^' + main_regex + '(.+)$', self.location, re.IGNORECASE)
+        if m:
+            self.directions['distance'] = m.group(1)
+            self.directions['measurement'] = m.group(2)
+            self.directions['direction'] = m.group(3)
+            self.location = m.group(6)
+            print(m.group(6))
+            print(self.location)
+        else:
+            # There's something in front of it, i.e., muizenberg 40km w$
+            m = re.search(r'^(.+?)' + re.escape(main_regex) + '$', self.location, re.IGNORECASE)
+            if m:
+                self.location = m.group(1)
+                self.directions['distance'] = m.group(2)
+                self.directions['measurement'] = m.group(3)
+                self.directions['direction'] = m.group(4)
+            else:
+                self.location = re.sub(main_regex, ' ', self.location, flags=re.IGNORECASE)
 
     def _clean_location(self):
         '''
@@ -131,79 +240,8 @@ class Location:
         # If anything has changed in the location string after this then it is a farm
         return temp == self.location
 
-    def _surveyor_general_farm_processing(self):
-        # Search through all the farms in the Surveyor General list
-        found_farms = list(filter(lambda x: re.search(self.location, x[1].strip()), self.farms))
-        if found_farms:
-            if len(found_farms) == 1:
-                self.notes = "Farm matched exactly in Surveyor General list. Matched farm = " + found_farms[0][1]
-                self.lat = found_farms[0][4]
-                self.long = found_farms[0][5]
-            else:
-                found_farms = min(found_farms, key=lambda x: sqrt((pow(float(x[4]) - self.original_lat, 2) + pow(float(x[5]) - self.original_long, 2))))
-                self.notes = "Multiple farms matched in Surveyor General list. Closest farm = " + found_farms[1]
-                self.lat = found_farms[4]
-                self.long = found_farms[5]
-            return
+    def _get_km_distance_from_original_location(self, lat, long):
+        lat_distance = (float(lat) - self.original_lat) * 110.54
+        long_distance = 111.32 * cos(float(long) - self.original_long)
 
-        # Fuzzy match through all the farms in the Surveyor General list
-        # Some farm names are too common to do fuzzy matching, basically anything with 'fontein'/'fountain'
-        if re.search(r'fou?nt[ae]in', self.location, re.IGNORECASE) is None:
-            # Let's try some fuzzy matching
-            # Can't work out a better way of doing this, so put the farm names into a temp var
-            temp = []
-            for f in self.farms:
-                temp.append(f[1].strip())
-            results = process.extractOne(self.location, temp)
-
-            # If we match greater than 88% or 50% with the right QDS let's call it
-            matchedFarm = self.farms[temp.index(results[0])]
-            if results[1] > 88:
-                self.notes = "Fuzzy matching using Surveyor General list. Best match = " + results[0] + " with 88+ accuracy"
-                self.lat = matchedFarm[4]
-                self.long = matchedFarm[5]
-            elif results[1] > 50 and self.original_qds[0:5] == matchedFarm[2][0:5]:
-                self.notes = "Fuzzy matching using Surveyor General list. Best match = " + results[0] + " with 50+ accuracy and same QDS"
-                self.lat = matchedFarm[4]
-                self.long = matchedFarm[5]
-            else:
-                self.notes = "No farm found using Surveyor General list. Closest match " + str(results[0]) + " with certainty of " + str(results[1])
-        else:
-            self.notes = "No farm found using Surveyor General list, no fuzzy matching as name is too common"
-
-    def _is_park(self):
-        '''
-        Works out whether this location is in a park or nature reserve
-        '''
-        return re.match('(National\s+Park|Nature\s+Reserve)', self.location, re.IGNORECASE)
-
-    def _get_directions(self):
-        main_regex = '\s*(\d\d*[,\.]?\d*)\s*(k?m|miles)\s+(([swne]{1,3})|south|no?rth|east|west)\s*(of|fro?m)?\s*'
-
-        # If there's something in front of it and something behind it, i.e., ^muizenberg, 20 km s of tokai$
-        # we really don't want to use the directions then, rather use the main thing and strip out the rest
-        m = re.search(r'^(.+?)' + re.escape(main_regex) + '(.+)$', self.location, re.IGNORECASE)
-        if m:
-            self.location = m.group(1)
-            return
-
-        # Second case: There's something behind it, i.e., ^40 km w from muizenberg
-        m = re.search(r'^' + re.escape(main_regex) + '(.+)$', self.location, re.IGNORECASE)
-        if m:
-            self.directions['distance'] = m.group(1)
-            self.directions['measurement'] = m.group(2)
-            self.directions['direction'] = m.group(3)
-            self.location = m.group(5)
-        else:
-            # Third case: There's something in front of it, i.e., muizenberg 40km w$
-            m = re.search(r'^(.+?)' + re.escape(main_regex) + '$', self.location, re.IGNORECASE)
-            if m:
-                self.location = m.group(1)
-                self.directions['distance'] = m.group(2)
-                self.directions['measurement'] = m.group(3)
-                self.directions['direction'] = m.group(4)
-            else:
-                self.location = re.sub(main_regex, ' ', self.location, flags=re.IGNORECASE)
-
-
-
+        return sqrt((pow(lat_distance, 2) + pow(long_distance, 2)))
