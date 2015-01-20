@@ -1,7 +1,6 @@
 import re
 from fuzzywuzzy import process
 from math import pow, sqrt, cos
-import sysLocation
 from enum import Enum
 
 
@@ -22,7 +21,7 @@ class Location:
     A location string with its latitude and longitude
     '''
 
-    def __init__(self, province='', qds='', lat='', long='', location='', farms=[], farm_names=[], gazetteer=[], google_geolocator=None):
+    def __init__(self, province='', qds='', lat='', long='', location='', farms=[], gazetteer=[], google_geolocator=None):
         '''
         Set up the variables used in this object
         '''
@@ -35,8 +34,9 @@ class Location:
 
         # These are databases/api tools to help us geolocate stuff
         self.farms = farms
-        self.farm_names = farm_names
+        self.farm_names = [x[1].strip() for x in farms]
         self.gazetteer = gazetteer
+        self.gazetteer_names = [x[1].strip() for x in gazetteer]
         self.google_geolocator = google_geolocator
 
         # Our geolocate info in some variables
@@ -56,6 +56,7 @@ class Location:
         '''
         The set of steps we run through to try and geolocate a string
         '''
+        print("----\n" + self.location)
         # Clean the location string
         self._clean_location()
 
@@ -68,6 +69,7 @@ class Location:
             # But wait, can't we just use the original lat/long?
             return
 
+        print(self.location)
         # Try and see if we can find this location in a list of the parks
         if self._geolocate_park():
             self.geolocation_source = "National parks list"
@@ -82,15 +84,17 @@ class Location:
                 # TODO add les' database farm processing
                 self.notes = "This is a farm but it could not be found in the gazetteer"
                 self.geolocation_source = "Gazetteer - "
-            return
 
         # Ok it's not a special thing like a park or a farm, so let's try the gazetteer and google
         self._geolocate_gazetteer()
         self._geolocate_google()
 
     def _geolocate_gazetteer(self):
-        # We have to run through all of the most trusted sources and then fallback to the least trusted
-        matched = list(filter(lambda x: re.search(self.location, x[1].strip()), self.farms))
+        # Get all of the matched locations
+        matched = list(filter(lambda x: re.search(self.location, x[1].strip()), self.gazetteer))
+
+        #
+        import pdb; pdb.set_trace()
         pass
 
     def _geolocate_park(self):
@@ -111,7 +115,8 @@ class Location:
                 lat = results.raw['geometry']['location']['lat']
                 lng = results.raw['geometry']['location']['lng']
                 # We are finding the difference in x and y between a point (i.e., x degrees)
-                self.notes = "Google maps API geolocates this as: " + results.raw['geometry']['location_type'] + " - distance from original qds = " + pow(float(lat) - self.original_lat, 2) + pow(float(lng) - self.original_long, 2)
+                self.notes = "Google maps API geolocates this as: " + results.raw['geometry']['location_type'] + \
+                             " - distance from original qds = " + self._get_km_distance_from_original_location()
                 # a ^ 2 + b ^ 2 = c ^ 2 !!!
             # else:
                 # Try it without bounding, maybe clean the loc a bit more too?
@@ -143,17 +148,23 @@ class Location:
             # Get the top 5 fuzzy matched farms
             results = process.extractBests(self.location, self.farm_names, limit=5, score_cutoff=70)
             if results:
-                matched_farms = self.farms[self.farm_names.index(results[0])]
-                self.lat = matched_farms[0][4]
-                self.long = matched_farms[0][5]
+                matched_farms = []
+                for result in results:
+                        matched_farms.append(self.farms[self.farm_names.index(result[0])])
 
                 # Which of those is the closest to the original lat long?
                 closest_matched_farm = min(matched_farms, key=lambda x: self._get_km_distance_from_original_location(x[4], x[5]))
+
                 if matched_farms[0] is not closest_matched_farm:
-                    self.notes = "Farm fuzzy matched (" + results[1] + "% + " + matched_farms[0][0] + \
-                                 ") through SG, best match different to closest farm to original lat long, which is = " + closest_matched_farm
+                    self.notes = "Farm fuzzy matched (" + matched_farms[0][1] + \
+                                 ") through SG, best match different to closest farm to original lat long, which is = " + closest_matched_farm[1]
                 else:
-                    self.notes = "Farm fuzzy matched (" + results[1] + "% + " + matched_farms[0][0] + ") though SG"
+                    self.notes = "Farm fuzzy matched (" + matched_farms[0][1] + ") though SG"
+
+                # Set the lat and long
+                self.lat = closest_matched_farm[0][4]
+                self.long = closest_matched_farm[0][5]
+                print(self.notes)
 
                 return True
 
@@ -184,8 +195,6 @@ class Location:
             self.directions['measurement'] = m.group(2)
             self.directions['direction'] = m.group(3)
             self.location = m.group(6)
-            print(m.group(6))
-            print(self.location)
         else:
             # There's something in front of it, i.e., muizenberg 40km w$
             m = re.search(r'^(.+?)' + re.escape(main_regex) + '$', self.location, re.IGNORECASE)
@@ -240,7 +249,11 @@ class Location:
         # If anything has changed in the location string after this then it is a farm
         return temp == self.location
 
-    def _get_km_distance_from_original_location(self, lat, long):
+    def _get_km_distance_from_original_location(self, lat=None, long=None):
+        if lat is None:
+            lat = self.lat
+        if long is None:
+            long = self.long
         lat_distance = (float(lat) - self.original_lat) * 110.54
         long_distance = 111.32 * cos(float(long) - self.original_long)
 

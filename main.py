@@ -9,14 +9,11 @@ from location import Location, Provinces
 
 # Change the province to geolocate other provinces
 province = Provinces.northern_cape
-province_folder = Provinces.northern_cape.replace(" ", "").lower()
+province_folder = province.name.replace(" ", "").lower()
 input_csv = province_folder + '/input.csv'
 
 # The farms.csv contains a list of farms in SA with their coordinates from the Surveyor General in Wynberg
 farms = list(csv.reader(open(province_folder + '/farms.csv')))
-farm_names = []
-for f in farms:
-    farm_names.append(f[1].strip())
 
 # The gazetteer is Les's database and has multiple sources. We need to do some processing to make it easy to
 # prioritise the data from different sources. We also only include stuff from the db in the right province.
@@ -32,11 +29,12 @@ gazetteer_province_names = {Provinces.eastern_cape: ['SAF-EC', 'Eastern Cape', '
                             Provinces.western_cape: ['WC', 'Western Cape', 'WP', 'SAF-CP', 'SAF-WC']}
 gazetteer_province_names = gazetteer_province_names[province]
 gazetteer = {}
-with open('gazetteersourcepriorities.csv', newline='') as csv_file:
+'''with open('gazetteersourcepriorities.csv', newline='') as csv_file:
     line_reader = csv.DictReader(csv_file, delimiter=',', quotechar="'")
     for line in line_reader:
         gazetteer[line['Source_']] = {'priority': line['Trustworthiness'], 'rows':
-            [x for x in gazetteer_source if x[8] == line['GazSource'] and line['PROVINCE'] in gazetteer_province_names]}
+            [x for x in gazetteer_source if x[8] == line['GazSource'] and x[2] in gazetteer_province_names]}'''
+
 
 # Google maps geolocating API - https://github.com/geopy/geopy
 from geopy.geocoders import GoogleV3
