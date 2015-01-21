@@ -3,8 +3,15 @@ from fuzzywuzzy import process
 from math import pow, sqrt, cos
 from enum import Enum
 
+class DatabaseLocation:
+    def __init__(self):
+        pass
+
 
 class Provinces(Enum):
+    '''
+    The provinces of SA
+    '''
     northern_cape = 'Northern Cape'
     free_state = 'Free State'
     gauteng = 'Gauteng'
@@ -16,7 +23,7 @@ class Provinces(Enum):
     eastern_cape = 'Eastern Cape'
 
 
-class Location:
+class GeolocatedLocation:
     '''
     A location string with its latitude and longitude
     '''
@@ -36,7 +43,7 @@ class Location:
         self.farms = farms
         self.farm_names = [x[1].strip() for x in farms]
         self.gazetteer = gazetteer
-        self.gazetteer_names = [x[1].strip() for x in gazetteer]
+        self.gazetteer_names = [x['location'].strip() for x in gazetteer]
         self.google_geolocator = google_geolocator
 
         # Our geolocate info in some variables
@@ -72,27 +79,37 @@ class Location:
         print(self.location)
         # Try and see if we can find this location in a list of the parks
         if self._geolocate_park():
-            self.geolocation_source = "National parks list"
+            self.geolocation_source = "National Parks list"
             return
 
-        # Otherwise, is this location a farm? This isn't a foolproof method, so we need to run it again if we can't
-        # find anything in the gazetteer or using google's api
-        if self._is_farm():
-            if self._geolocate_surveyor_general_farms():
-                self.geolocation_source = "Surveyor general farms"
-            else:
-                # TODO add les' database farm processing
-                self.notes = "This is a farm but it could not be found in the gazetteer"
-                self.geolocation_source = "Gazetteer - "
+        # Try and match this location to a farm name
+        # Get the farm number and clean the string a bit
+        self._is_farm()
+
+        # Try the surveyor general's list first
+        if self._geolocate_surveyor_general_farms():
+            self.geolocation_source = "Surveyor General farms"
+            return
+
+        # Try the gazetteer
+        # TODO add les' database farm processing
+        self.notes = "This is a farm but it could not be found in the gazetteer"
+        self.geolocation_source = "Gazetteer farms"
 
         # Ok it's not a special thing like a park or a farm, so let's try the gazetteer and google
         self._geolocate_gazetteer()
         self._geolocate_google()
 
     def _geolocate_gazetteer(self):
-        # Get all of the matched locations
-        matched = list(filter(lambda x: re.search(self.location, x[1].strip()), self.gazetteer))
+        # Get all fuzzy matched locations +90
+        matched = list(filter(lambda x: re.search(self.location, x.location.strip()), self.gazetteer))
 
+        if matched:
+            # Discard all of the matches which are not within the same QDS
+
+            # Discard all of the least trustworthy sources
+
+            # Choose the feature type which is most appropriate
         #
         import pdb; pdb.set_trace()
         pass

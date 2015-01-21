@@ -5,7 +5,7 @@ It then prints the output in an output.csv
 
 # Import the relevant libraries
 import csv
-from location import Location, Provinces
+from location import GeolocatedLocation, Provinces, GazetteerEntry
 
 # Change the province to geolocate other provinces
 province = Provinces.northern_cape
@@ -15,9 +15,9 @@ input_csv = province_folder + '/input.csv'
 # The farms.csv contains a list of farms in SA with their coordinates from the Surveyor General in Wynberg
 farms = list(csv.reader(open(province_folder + '/farms.csv')))
 
-# The gazetteer is Les's database and has multiple sources. We need to do some processing to make it easy to
-# prioritise the data from different sources. We also only include stuff from the db in the right province.
-gazetteer_source = list(csv.reader(open('GazetteerForSANBI.csv')))
+# The gazetteer_all is Les's database and has multiple sources. We need to do some processing to make it easy to
+# prioritise the data from different sources.
+gazetteer_all = list(csv.reader(open('GazetteerForSANBI.csv')))
 gazetteer_province_names = {Provinces.eastern_cape: ['SAF-EC', 'Eastern Cape', 'Eastern Cape?', 'EC'],
                             Provinces.free_state: ['F', 'Free State', 'FS', 'SAF-FS'],
                             Provinces.gauteng: ['Gauteng', 'Gauteng & Mphum', 'Gautng or Lstho', 'SAF-GA', 'GP', 'SAF-TV'],
@@ -28,13 +28,26 @@ gazetteer_province_names = {Provinces.eastern_cape: ['SAF-EC', 'Eastern Cape', '
                             Provinces.north_west: ['North West', 'North-West', 'NW', 'SAF-NW', 'SAF-TV'],
                             Provinces.western_cape: ['WC', 'Western Cape', 'WP', 'SAF-CP', 'SAF-WC']}
 gazetteer_province_names = gazetteer_province_names[province]
-gazetteer = {}
+
+# Add in the source priority for every entry and also only include stuff from the db in the right province.
+gazetteer_source_priorities = list(csv.reader(open('gazetteersourcepriorities.csv')))
+gazetteer_source_priorities.sort(key=lambda x: x[3])
+gazetteer = []
+for entry in gazetteer_all:
+    if entry[2] in gazetteer_province_names:
+        g = {'gid': entry[0],
+             'qds': entry[3],
+             'source_trustworthiness': [x[3] for x in gazetteer_source_priorities if x[4] == entry[8]][0],
+             'lat': entry[7],
+             'long': entry[6],
+             'location': entry[1]}
+        gazetteer.append(g)
+
 '''with open('gazetteersourcepriorities.csv', newline='') as csv_file:
     line_reader = csv.DictReader(csv_file, delimiter=',', quotechar="'")
     for line in line_reader:
         gazetteer[line['Source_']] = {'priority': line['Trustworthiness'], 'rows':
             [x for x in gazetteer_source if x[8] == line['GazSource'] and x[2] in gazetteer_province_names]}'''
-
 
 # Google maps geolocating API - https://github.com/geopy/geopy
 from geopy.geocoders import GoogleV3
@@ -76,11 +89,11 @@ with open(input_csv, newline='') as csv_file:
             raise
 
         # Create a geolocated location object
-        locality = Location(province=province, qds=qds, lat=lat, long=long, location=line['Locality'],
+        locality = GeolocatedLocation(province=province, qds=qds, lat=lat, long=long, location=line['Locality'],
                                      farms=farms, gazetteer=gazetteer, google_geolocator=google_geolocator)
 
         # Write the location object to the output csv
-        writer.writerow(locality.location, qds, locality.lat, locality.long, 'precision', locality.source, results, googleMapsLink, notes)
+        writer.writerow([locality.location, qds, locality.lat, locality.long, 'precision', locality.location, locality, locality.notes])
 
 # Just put this here for the moment, we're not using it but it might come in useful
 def convert_qds(qds):
