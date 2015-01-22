@@ -1,0 +1,35 @@
+Source_,ConfLvl,Description,Trustworthiness,GazSource
+Acocks field notes/maps,12,Acocks field notes/maps,2,16
+AFRICAN PLACENAMES MapStudios,0,no coordinates - AFRICAN PLACENAMES from via MapStudiosWebsite.xls,0,110
+Alastair Potts,30,"Various place names from UCT georeferencing section, source unknown.",4,31
+Cadast ENPAT2001,20,Combined cadastral shapefiles from ENPAT2001,2,3
+Digitised off 250k topographical maps,12,Digitised off 250k topographical maps,3,20
+Digitised off 500k 1900-1919 topographical map,12,Digitised off 500k 1900-1919 topographical map,3,22
+Digitised off 500k topographical maps,12,Digitised off 500k topographical maps,3,21
+Digitised off 50k topographical maps,12,Digitised off 50k topographical maps,3,19
+Digitised off other map source,12,Digitised of other map source,3,97
+Digitised off topographical maps,12,Digitised off topographical maps,2,17
+DIVA-GIS ZAF_gaz.zip,10,Gazetteer for South Africa downloaded from DIVA-GIS website April 2012,0,32
+Dmct Brd Plc_Name.dbf,12,Demarcation Board Plc_Name.dbf,2,4
+Dmct Brd PlName.dbf,12,Demarcation Board PlName.dbf,2,5
+Dmct Brd sa_parent_clk.dbf,20,Demarcation Board parent farm names (sa_parent_clk.dbf),3,6
+ENPAT2001,12,Place names other than cadasters from ENPAT,1,30
+Forestry Herbarium notes,24,Tapson & Poynton Management aid from Forestry Herbarium,3,0
+HSRC list from SAGNS website,0,HSRC list from SAGNS website,3,14
+Jack Skead Gazetteer edited by LWP,12,Point from Zoo-historical Gazetteer for sn Af,2,11
+Jack Skead synonyms edited by LWP,12,Point from Zoo-historical Gazetteer for sn Af,2,12
+LesothoVillagesGoogleEarth,12,Village names from Google Earth,1,23
+Magisterial districts,14,Magisterial districts from 1:500 000 map data,30,10
+Mozambique data,12,Data from delegate to TREES-3 workshop,1,24
+Other,12,Other source not mentioned above,5,25
+Pers. Comm.,12,Point from personal communication of someone with personal knowledge,3,98
+Personal GPS data,1,GPS locations added by user,1,99
+PRECIS Gaz,17,Names captured from various scale maps - centroid of ¼º grid,29,1
+SAGNS Official Database,12,SAGNS Official Database - downloaded 15 Sep 2006,1,13
+SG Built_pts.shp,12,Built_pts.shp from 1:500 000 map data,3,8
+SG Built_up.shp,22,Built_up.shp from 1:500 000 map data,3,7
+SG Gaz,12,Gazetteer from CDSM - names on maps,1,2
+SG Gaz 2011,12,Gazetteer from NGI - names on 1:50 000 maps,1,15
+SG Railway points,12,SG Railway points from 1:500 000 data,3,18
+To delete,0,,,999
+VEGM20xx protected areas,21,VEGM2006 protected areas,5,9
