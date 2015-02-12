@@ -8,7 +8,7 @@ import csv
 from location import Location, Provinces, FeatureTypes
 
 # Change the province to geolocate other provinces
-province = Provinces.northern_cape
+province = Provinces.kwazulu_natal
 input_csv = 'data_to_geolocate/' + province.name + '.csv'
 
 # Collect all of the databases we will use for geolocating
@@ -22,20 +22,30 @@ for entry in farms_all:
         farms.append(Location(db_id=entry[0], qds=entry[3].strip(), priority=1, lat=float(entry[4]),
                               long=float(entry[5]), location=entry[1].strip(), province=province,
                               feature_type=FeatureTypes.farm, source="Farms"))
-databases.append({"db": farms, "feature_type": FeatureTypes.farm, "name": "Farms"})
+#databases.append({"db": farms, "feature_type": FeatureTypes.farm, "name": "Farms"})
 
 # The gazetteer_all has multiple sources which need prioritising
 gazetteer_all = list(csv.reader(open('gazetteer.csv')))
 gazetteer_source_priorities = list(csv.reader(open('gazetteer_source_priorities.csv')))
 gazetteer_source_priorities.sort(key=lambda x: x[3])
 gazetteer = []
+i = 0
 for entry in gazetteer_all:
-    if entry[2] in province.value:
+    #if entry[2] in province.value:
+    # Skip the first one, or if they haven't got a lat or long
+    if i == 0 or entry[7].strip() == '' or entry[6].strip() == '':
+        i += 1
+        continue
+    try:
         g = Location(db_id=entry[0], qds=entry[3].strip(), province=province,
                      source="Gazetteer - " + [x[0] for x in gazetteer_source_priorities if x[4] == entry[8]][0],
                      priority=int([x[3] for x in gazetteer_source_priorities if x[4] == entry[8]][0]),
                      lat=float(entry[7].strip()), long=float(entry[6].strip()), location=entry[1].strip())
-        gazetteer.append(g)
+    except:
+        print(entry)
+        continue
+
+    gazetteer.append(g)
 databases.append({"db": gazetteer, "feature_type": FeatureTypes.unknown, "name": "Gazetteer"})
 
 # Google maps geolocating API - https://github.com/geopy/geopy
@@ -49,11 +59,10 @@ google_geolocator = GoogleV3()
 # Write the headers to the output file
 fieldnames = ['original_locality',
               'original_qds',
+              'new_locality'
               'latitude',
               'longitude',
               'precision',
-              'source',
-              'corrected_address',
               'google_maps_link',
               'notes']
 output_csv = 'output.csv'
@@ -68,6 +77,7 @@ with open(input_csv, newline='') as csv_file:
     # Iterate over each location
     for line in line_reader:
         qds = line['Locus'].strip()
+        print('--')
         print(line['Locality'])
 
         # Get the original lat/long and raise an error if the QDS is weird
@@ -85,6 +95,23 @@ with open(input_csv, newline='') as csv_file:
         # Write the location object to the output csv
         if temp:
             print(temp.location)
+            fieldnames = ['original_locality',
+              'original_qds',
+              'new_locality'
+              'latitude',
+              'longitude',
+              'precision',
+              'google_maps_link',
+              'notes']
+            with open(output_csv, 'a', newline='') as newFile:
+                writer = csv.writer(newFile, skipinitialspace=True)
+                writer.writerow([line['Locality'],
+                                 qds,
+                                 temp.location,
+                                 temp.lat,
+                                 temp.long,
+                                 '',
+                                 'http://www.google.co.za/maps/place/' + str(temp.lat) + ',' + str(temp.long),
+                                 temp.notes])
         else:
             print("Could not find location")
-        #writer.writerow([locality.location, qds, locality.lat, locality.long, 'precision', locality.location, locality, locality.notes])

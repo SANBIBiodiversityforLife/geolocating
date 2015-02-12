@@ -1,5 +1,5 @@
 Locality,Minimum_elevation_in_meters,Maximum_elevation_in_meters,Decimal_latitude,Decimal_longitude,Coordinate_uncertainty_in_meters,Coords_uncertainty_description,Coords_source,Locus
-10 km S Vioolsdrif,,,-28.87,17.62,,centroid of 15x15 minute grid (QDS),,2817DC
+10 km NE Vioolsdrif,,,-28.87,17.62,,centroid of 15x15 minute grid (QDS),,2817DC
 Farm Aggenys 56,,,-29.2,18.84,,"degree, minute and integer second",,2918BB
 77 km E Springbok,,,-29.37,18.62,,centroid of 15x15 minute grid (QDS),,2918BC
 77 km E of Springbok,,,-29.62,18.62,,centroid of 15x15 minute grid (QDS),,2918DA

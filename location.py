@@ -2,6 +2,8 @@ import re, sys
 from fuzzywuzzy import process
 from math import pow, sqrt, cos, radians
 from enum import Enum
+from geopy import Point
+from geopy.distance import distance, VincentyDistance
 
 
 class FeatureTypes(Enum):
@@ -58,6 +60,8 @@ class Location:
 
         # If the loc is x km from something etc then try and get the location and clean the location string further
         directions = self._get_directions()
+        if directions:
+            print(directions)
 
         # Check and see if it's a farm and clean up the name a bit more
         if self._is_farm():
@@ -72,17 +76,19 @@ class Location:
             # But wait, can't we just use the original lat/long?
             return
 
+        # Try and get decimal degrees (e.g.,  31d38m43sS 20d24m57sE from the string if it exists use that as lat long)
+        if self._contains_degrees_in_location():
+            print('Found lat long in location: ' + self.lat + ' ' + self.long + ' ' + self.location)
+            return self
+
         # Try and see if we can find this location in one of the databases
         for database in databases:
-            print("trying " + database["name"])
             geolocated_location = self._geolocate_using_db(database["db"])
             if geolocated_location:
                 self.feature_type = database["feature_type"]
                 self.source = database["name"]
                 if directions:
-                    print('lat: ' + str(geolocated_location.lat) + ' long: ' + str(geolocated_location.long))
                     geolocated_location._apply_directions(directions)
-                    print('lat: ' + str(geolocated_location.lat) + ' long: ' + str(geolocated_location.long))
                 return geolocated_location
 
         # If all else fails, try google
@@ -90,6 +96,18 @@ class Location:
         if directions:
             geolocated_location._apply_directions(directions)
         return geolocated_location
+
+    def _contains_degrees_in_location(self):
+        regex = '\s[sS][\s\.](\d\d)[\s\.d](\d\d)[\s\.m](\d\d)(\.\d+)?s?\s*,?\s*[eE][\s\.](\d\d)[\s\.d](\d\d)[\s\.m](\d\d)(\.\d+)?s?\s'
+        match = re.search(regex, self.location)
+        if match:
+            south = {'degrees': float(match.group(1)), 'minutes': float(match.group(2)), 'seconds': float(match.group(3))}
+            east = {'degrees': float(match.group(5)), 'minutes': float(match.group(6)), 'seconds': float(match.group(7))}
+            self.latitude = south['degrees'] + south['minutes'] / 60 + south['seconds'] / 3600
+            self.longitude = east['degrees'] + east['minutes'] / 60 + east['seconds'] / 3600
+            return True
+        else:
+            return False
 
     def _geolocate_using_db(self, db):
         # If we get a farm number try and get the location based on that (if we can't then continue on)
@@ -172,96 +190,94 @@ class Location:
         return re.match('(National\s+Park|Nature\s+Reserve)', self.location, re.IGNORECASE)
 
     def _get_directions(self):
-        main_regex = '\s*(\d\d*[,\.]?\d*)\s*(k?m|miles)\s+(([swne]{1,3})|south|no?rth|east|west)\s*(of|fro?m)?\s*'
-
         # If there's something in front of it and something behind it, i.e., ^muizenberg, 20 km s of tokai$
         # we really don't want to use the directions then, rather use the main thing and strip out the rest
+        main_regex = '\s*(\d\d*[,\.]?\d*)\s*(k?m|miles)\s+(([swne]{1,3})|south|no?rth|east|west)\s*(of|fro?m)?\s*'
         m = re.search(r'^(.+?)' + re.escape(main_regex) + '(.+)$', self.location, re.IGNORECASE)
         if m:
             self.location = m.group(1)
             return False
 
-        # There's something behind it, i.e., ^40 km w from muizenberg
-        m = re.search(r'^' + main_regex + '(.+)$', self.location, re.IGNORECASE)
-        if m:
-            self.location = m.group(6)
-            return {'distance': float(m.group(1)), 'measurement': m.group(2).strip().lower(), 'direction': m.group(3).strip().lower()}
+        # We store the location variable and try and substitute stuff in it
+        location = self.location
+
+        # Look for digits and measurement units
+        measurement_units = {'miles': ['miles', 'mile', 'mi'],
+                             'yards': ['yard', 'yards'],
+                             'kilometers': ['km', 'kmeters', 'kmetres', 'kilometers', 'kmeter', 'kms', 'kmetre', 'kilometer'],
+                             'meters': ['m', 'meters', 'metres', 'meter', 'metre', 'ms'],
+                             'feet': ['ft', 'feet']}
+        distance = 0
+        measurement = ''
+        for name, variations in measurement_units.items():
+            for v in variations:
+                regex = '\s*(\d\d*[,\.]?\d*)\s*(' + v + ')'
+                substitute = re.search(regex, location, re.IGNORECASE)
+                temp = re.sub(regex, '', location, re.IGNORECASE)
+                if temp is not location:
+                    distance = float(substitute.group(1))
+                    measurement = name
+                    if variations == measurement_units['miles']:
+                        distance *= 1.60934
+                    elif variations is measurement_units['meters']:
+                        distance *= 1000
+                    elif variations is measurement_units['feet']:
+                        distance *= 3280.84
+                    elif variations is measurement_units['yards']:
+                        distance *= 1093.61
+                    location = temp
+                    break
+
+        # Look for bearings, keep track of the ones we need to remove and get rid of them afterwards
+        bearings_matches = {'south': ['south', 's', 'se', 'sw', 'south-east', 'southeast', 'south-west', 'southwest'],
+                            'north': ['north', 'n', 'ne', 'nw', 'north-east', 'northeast', 'north-west', 'northwest'],
+                            'east': ['east', 'e', 'se', 'ne', 'south-east', 'southeast', 'north-east', 'northeast'],
+                            'west': ['west', 'w', 'sw', 'nw', 'south-west', 'southwest', 'north-west', 'northwest']}
+        bearings = []
+        strings_to_remove = set()  # apparently keeps unique values only
+        for proper_name, match_list in bearings_matches.items():
+            for match in match_list:
+                regex = '\s(' + match + ')\.?(\s|$)'
+                temp = re.sub(regex, '', location, flags=re.IGNORECASE)
+                if temp is not location:
+                    bearings.append(proper_name)
+                    strings_to_remove.add(regex)
+
+        # Remove all of the applicable bearings
+        for regex in strings_to_remove:
+            location = re.sub(regex, '', location, flags=re.IGNORECASE)
+
+        # If we have bearings and distance and measurement we can make a sensible set of directions to return
+        if bearings and distance and measurement:
+            # Clean up the location string
+            location = re.sub('([oO]f|[fF]ro?m)', '', location)
+            location = re.sub('^\s*[\.,;]', '', location)
+            location = re.sub('\s*[\.,;]$', '', location)
+            self.location = location.strip()
+            return {'bearings': bearings, 'distance': distance}
         else:
-            # There's something in front of it, i.e., muizenberg 40km w$
-            m = re.search(r'^(.+?)' + re.escape(main_regex) + '$', self.location, re.IGNORECASE)
-            if m:
-                self.location = m.group(1)
-                return {'distance': float(m.group(2)), 'measurement': m.group(3).strip().lower(), 'direction': m.group(4).strip().lower()}
+            return False
+
+    def _apply_directions(self, directions):
+        for bearing in directions['bearings']:
+            # Convert the bearing into something VincentyDistance understands:
+            if bearing == 'south':
+                bearing_degrees = 180
+            elif bearing == 'north':
+                bearing_degrees = 0
+            elif bearing == 'east':
+                bearing_degrees = 90
             else:
-                self.location = re.sub(main_regex, ' ', self.location, flags=re.IGNORECASE)
-                return False
+                bearing_degrees = 270
 
-    def _apply_directions(self, directions):
-        # Convert everything to KM
-        #import pdb; pdb.set_trace()
-        if directions['measurement'] in ['m', 'meters', 'metres']:
-            directions['distance'] = directions['distance'] / 1000
-        elif directions['measurement'] in ['mi', 'miles']:
-            directions['distance'] = directions['distance'] * 1.60934
-        # Convert the decimal degrees to radians
-        if directions["direction"] in ['s', 'south']:
-                self.lat = self.lat - (directions['distance'] * (1/110.54))
-                return True
-        if directions["direction"] in ['n', 'north']:
-                self.lat = self.lat + (directions['distance'] * (1/110.54))
-                return True
+            # Define starting point.
+            start = Point(self.lat, self.long)
 
-        if directions["direction"] in ['e', 'east']:
-                self.long = self.long + (directions['distance'] * 1/(cos(self.lat) * 111.320))
-                return True
-        if directions["direction"] in ['w', 'west']:
-                self.long = self.long - (directions['distance'] * 1/(cos(self.lat) * 111.320))
-                return True
-
-    def _apply_directions(self, directions):
-        # Convert everything to KM
-        #import pdb; pdb.set_trace()
-        if directions['measurement'] in ['m', 'meters', 'metres']:
-            directions['distance'] = directions['distance'] / 1000
-        elif directions['measurement'] in ['mi', 'miles']:
-            directions['distance'] = directions['distance'] * 1.60934
-        # Convert the decimal degrees to radians
-        if directions["direction"] in ['s', 'south']:
-                self.lat = radians(self.lat)
-                return True
-        if directions["direction"] in ['n', 'north']:
-                self.lat = radians(self.lat)
-                return True
-
-        if directions["direction"] in ['e', 'east']:
-                self.long = self.long + (directions['distance'] * 1/(cos(self.lat) * 111.320))
-                return True
-        if directions["direction"] in ['w', 'west']:
-                self.long = self.long - (directions['distance'] * 1/(cos(self.lat) * 111.320))
-                return True
-
-
-
-
-        # Complicated stuff
-        if directions["direction"] in ['se', 'southeast', 'south-east', 'south east']:
-                directions["direction"] = ['south', 'east']
-        if directions["direction"] in ['ne', 'northeast', 'north-east', 'north east']:
-                directions["direction"] = ['north', 'east']
-        if directions["direction"] in ['nw', 'northwest', 'north-west', 'north west']:
-                directions["direction"] = ['north', 'west']
-        if directions["direction"] in ['sw', 'southwest', 'south-west', 'south west']:
-                directions["direction"] = ['south', 'west']
-
-        for direction in directions:
-            if direction in ['s', 'south']:
-                    self.lat = self.lat - (directions['distance'] * (1/110.54))
-            if direction in ['n', 'north']:
-                    self.lat = self.lat + (directions['distance'] * (1/110.54))
-            if direction in ['e', 'east']:
-                    self.long = self.long + (directions['distance'] * 1/(cos(self.lat) * 111.320))
-            if direction in ['w', 'west']:
-                    self.long = self.long - (directions['distance'] * 1/(cos(self.lat) * 111.320))
+            # Use the `destination` method with a bearing of 0 degrees (which is north)
+            # in order to go from point `start` 1 km to north.
+            destination = VincentyDistance(kilometers=directions['distance']).destination(start, bearing_degrees)
+            self.lat = destination.latitude
+            self.long = destination.longitude
         return True
 
     def _clean_location(self):
